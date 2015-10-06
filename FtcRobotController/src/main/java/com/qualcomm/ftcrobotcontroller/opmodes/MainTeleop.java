@@ -1,7 +1,7 @@
 package com.qualcomm.ftcrobotcontroller.opmodes;
 /**
  * Created by 6103 on 10/6/2015.
- * MainTeleOp
+ * MainTeleOp program
  */
 
 //Imports
