@@ -37,27 +37,33 @@ public class MainTeleop extends OpMode{
         leftDrive_wheel = hardwareMap.dcMotor.get("drive_left_wheel");
         rightDrive_wheel = hardwareMap.dcMotor.get("drive_right_wheel");
 
-        //get references to the assembly drive motors
+        //Get references to the assembly drive motors
         leftDrive_assembly = hardwareMap.dcMotor.get("drive_left_assembly");
         rightDrive_assembly = hardwareMap.dcMotor.get("drive_right_assembly");
     }
 
     @Override
     public void loop() {
-        //Motor drive values
+        //Get values from controller 
         leftWheelValue = gamepad1.left_stick_y;
         rightWheelValue = -(gamepad1.right_stick_y);
 
-        //Write wheel values to motor
+        //Write values to motor
         leftDrive_wheel.setPower(leftWheelValue);
         rightDrive_wheel.setPower(rightWheelValue);
 
-        //Write trigger value to assembly forward
-        leftDrive_assembly.setPower((gamepad1.left_trigger > 0) ? assemblyDriveValue:0);
-        rightDrive_assembly.setPower((gamepad1.right_trigger > 0) ? assemblyDriveValue:0);
+        //Write trigger value to assembly motors forward
+        leftDrive_assembly.setPower((gamepad1.left_trigger > 0) ? gamepad1.left_trigger:0); //Left is pressed
+        rightDrive_assembly.setPower((gamepad1.right_trigger < 0) ? -(gamepad1.right_trigger):0);
+        
+        /*
+        Old code Dosnt work
+        //Write trigger values to assembly motors
+        leftDrive_assembly.setPower(gamepad1.left_trigger);
+        rightDrive_assembly.setPower(gamepad1.right_trigger);
+        */
 
-
-        //Write bumper value to assembly backward
+        //Write bumper value to assembly motors backward
         leftDrive_assembly.setPower((gamepad1.left_bumper)? -(assemblyDriveValue):0);
         rightDrive_assembly.setPower((gamepad1.right_bumper) ? -(assemblyDriveValue):0);
     }
